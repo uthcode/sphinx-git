@@ -76,11 +76,12 @@ class GitChangelog(Directive):
 
             item = nodes.list_item()
             item += [
-                nodes.strong(text=message),
-                nodes.inline(text=" by "),
-                nodes.emphasis(text=str(commit.author)),
+                nodes.emphasis(text="Last Updated by "),
+                nodes.strong(text=str(commit.author)),
                 nodes.inline(text=" at "),
-                nodes.emphasis(text=str(date_str))
+                nodes.emphasis(text=str(date_str)),
+                nodes.inline(text="with message")
+                nodes.strong(text=message),
             ]
             if detailed_message:
                 detailed_message = detailed_message.strip()
