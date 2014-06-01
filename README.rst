@@ -16,3 +16,11 @@ For more details, see `the documentation on Read the Docs`_.
 
 .. _Sphinx documentation tool: http://sphinx-doc.org/
 .. _the documentation on Read the Docs: http://sphinx-git.readthedocs.org/en/latest/?utm_source=github&utm_medium=github&utm_campaign=github
+
+Runbook
+-------
+
+    python setup.py sdist
+    
+Place the sdist at a public dropbox location and in utils/requirements.txt
+    
