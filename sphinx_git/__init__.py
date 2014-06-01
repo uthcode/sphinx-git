@@ -44,7 +44,7 @@ class GitChangelog(Directive):
         repo = self._find_repo()
         commits = self._filter_commits(repo)
         return commits
-        
+
     def _get_env(self):
         return self.state.document.settings.env
 
@@ -52,7 +52,7 @@ class GitChangelog(Directive):
         env = self._get_env()
         repo = Repo(env.srcdir)
         return repo
-        
+
     def _get_document_path(self):
         env = self._get_env()
         return env.doc2path(env.docname)
@@ -80,7 +80,7 @@ class GitChangelog(Directive):
                 nodes.strong(text=str(commit.author)),
                 nodes.inline(text=" at "),
                 nodes.emphasis(text=str(date_str)),
-                nodes.inline(text="with message")
+                nodes.inline(text="with message"),
                 nodes.strong(text=message),
             ]
             if detailed_message:
