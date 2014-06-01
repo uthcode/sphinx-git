@@ -44,16 +44,23 @@ class GitChangelog(Directive):
         repo = self._find_repo()
         commits = self._filter_commits(repo)
         return commits
+        
+    def _get_env(self):
+        return self.state.document.settings.env
 
     def _find_repo(self):
-        env = self.state.document.settings.env
+        env = self._get_env()
         repo = Repo(env.srcdir)
         return repo
+        
+    def _get_document_path(self):
+        env = self._get_env()
+        return env.doc2path(env.docname)
 
     def _filter_commits(self, repo):
         if 'rev-list' in self.options:
             return repo.iter_commits(rev=self.options['rev-list'])
-        commits = repo.iter_commits()
+        commits = repo.iter_commits(paths=self._get_document_path())
         revisions_to_display = self.options.get('revisions', 10)
         return list(commits)[:revisions_to_display]
 
