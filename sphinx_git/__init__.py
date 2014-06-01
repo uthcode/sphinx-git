@@ -61,11 +61,11 @@ class GitChangelog(Directive):
         if 'rev-list' in self.options:
             return repo.iter_commits(rev=self.options['rev-list'])
         commits = repo.iter_commits(paths=self._get_document_path())
-        revisions_to_display = self.options.get('revisions', 10)
+        revisions_to_display = self.options.get('revisions', 1)
         return list(commits)[:revisions_to_display]
 
     def _build_markup(self, commits):
-        list_node = nodes.bullet_list()
+        list_node = nodes.definition_list()
         for commit in commits:
             date_str = datetime.fromtimestamp(commit.authored_date)
             if '\n' in commit.message:
@@ -80,7 +80,7 @@ class GitChangelog(Directive):
                 nodes.strong(text=str(commit.author)),
                 nodes.inline(text=" at "),
                 nodes.emphasis(text=str(date_str)),
-                nodes.inline(text="with message"),
+                nodes.inline(text=" with message "),
                 nodes.strong(text=message),
             ]
             if detailed_message:
